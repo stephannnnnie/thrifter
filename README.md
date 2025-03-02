@@ -1,4 +1,6 @@
-# thrifter
+# Thrifter
+Credits to: dengheng@usc.edu boyuedon@usc.edu helenscun@gmail.com zhaoruiw@usc.edu
+----------------------------------------------------------------
 
 ## Inspiration
 Thrifting not only makes fashion more affordable but also promotes sustainability by encouraging people to purchase second-hand clothing instead of fast fashion items. Our goal was to create a platform that makes second-hand shopping more personalized and enjoyable.
