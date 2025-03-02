@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClosetCouture | About Us</title>
+    <style>
+        :root {
+            --primary: #ffd1dc;
+            --background: #fff6f6;
+            --text: #4a4a4a;
+            --light-text: #777777;
+            --border: #ffe4e4;
+            --hover: #ffb6c1;
+            --leaf: #98fb98;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+        
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        .navbar {
+        padding: 20px;
+        text-align: center;
+        border-bottom: 2px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .nav-brand {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: var(--text);
+    }
+
+    .leaf-logo {
+        width: 30px;
+        height: 30px;
+        background-color: var(--leaf);
+        margin-right: 15px;
+        clip-path: path('M15,0 C25,10 30,15 15,30 C0,15 5,10 15,0');
+        animation: gentle-rotate 3s ease-in-out infinite;
+    }
+
+    @keyframes gentle-rotate {
+        0%, 100% { transform: rotate(0deg); }
+        50% { transform: rotate(5deg); }
+    }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: normal;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: 3px;
+        }
+
+        .about-container {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .about-content {
+            margin-top: 40px;
+            position: relative;
+        }
+
+        .about-text {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+
+        p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: var(--light-text);
+        }
+
+        /* Leaf Animation */
+        .leaf {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: var(--leaf);
+            clip-path: path('M25,0 C35,10 50,25 25,50 C0,25 15,10 25,0');
+            animation: floating 3s ease-in-out infinite,
+                       spinning 10s linear infinite;
+            opacity: 0.8;
+        }
+
+        .leaf:nth-child(1) { top: -20px; left: 10%; }
+        .leaf:nth-child(2) { top: 30%; right: -20px; animation-delay: -1s; }
+        .leaf:nth-child(3) { bottom: -20px; left: 20%; animation-delay: -2s; }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        @keyframes spinning {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: var(--light-text);
+            border-top: 2px solid var(--border);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand">
+            <div class="leaf-logo"></div>
+            <span class="logo">CLOSETCOUTURE</span>
+        </a>
+        <div class="nav-links">
+            <!-- ...existing nav links... -->
+        </div>
+    </nav>
+    <div class="about-container">
+        <div class="about-content">
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            
+            <div class="about-text">
+                <h1>Our Vision</h1>
+                <p>
+                    At ClosetCouture, we believe in the power of sustainable fashion to create positive change. 
+                    Our platform connects conscious consumers with pre-loved clothing, reducing waste and 
+                    giving beautiful pieces a second life.
+                </p>
+                <p>
+                    We're committed to making fashion more sustainable, one garment at a time. By choosing 
+                    second-hand clothing, you're not just updating your wardrobe – you're part of a movement 
+                    towards a more sustainable future.
+                </p>
+                <p>
+                    Our community of eco-conscious fashionistas proves that style and sustainability can go 
+                    hand in hand. Together, we're redefining fashion's impact on our planet.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        © 2025 closetcouture
+    </footer>
+</body>
+</html>

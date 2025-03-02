@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClosetCouture | Sell</title>
+    <style>
+        :root {
+            --primary: #ffd1dc;
+            --background: #fff6f6;
+            --text: #4a4a4a;
+            --light-text: #777777;
+            --border: #ffe4e4;
+            --hover: #ffb6c1;
+            --leaf: #98fb98;
+            --form-bg: rgba(255, 255, 255, 0.9);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+        
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .leaf-logo {
+            width: 30px;
+            height: 30px;
+            background-color: var(--leaf);
+            margin-right: 15px;
+            clip-path: path('M15,0 C25,10 30,15 15,30 C0,15 5,10 15,0');
+            animation: gentle-rotate 3s ease-in-out infinite;
+        }
+
+        @keyframes gentle-rotate {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: normal;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: 3px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .nav-links a:hover {
+            color: var(--hover);
+        }
+
+        .sell-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .sell-form {
+            background: var(--form-bg);
+            padding: 30px;
+            border: 3px solid var(--primary);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(255, 209, 220, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: var(--text);
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            font-size: 16px;
+            background: white;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input[type="number"] {
+            width: 200px;
+        }
+
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            font-size: 16px;
+            min-height: 100px;
+            resize: vertical;
+            background: white;
+        }
+
+        .image-preview {
+            width: 200px;
+            height: 200px;
+            border: 2px dashed var(--primary);
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: cover;
+            background-position: center;
+            color: var(--light-text);
+        }
+
+        .preferences-section {
+            margin: 30px 0;
+        }
+
+        .preferences-title {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: var(--text);
+            text-align: center;
+        }
+
+        .category-label {
+            font-weight: bold;
+            margin: 20px 0 10px 0;
+            color: var(--text);
+            font-size: 16px;
+        }
+
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tag {
+            padding: 8px 16px;
+            background: white;
+            border: 2px solid var(--primary);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .tag:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .tag.selected {
+            background: var(--primary);
+            color: white;
+            border-color: var(--hover);
+        }
+
+        .submit-btn {
+            background: var(--primary);
+            color: var(--text);
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            background: var(--hover);
+        }
+
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .spinner {
+            border: 4px solid rgba(255, 209, 220, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid var(--primary);
+            width: 30px;
+            height: 30px;
+            margin: 0 auto;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .notification {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            display: none;
+        }
