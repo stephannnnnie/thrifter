@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClosetCouture | Sell</title>
+    <style>
+        :root {
+            --primary: #ffd1dc;
+            --background: #fff6f6;
+            --text: #4a4a4a;
+            --light-text: #777777;
+            --border: #ffe4e4;
+            --hover: #ffb6c1;
+            --leaf: #98fb98;
+            --form-bg: rgba(255, 255, 255, 0.9);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+        
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .leaf-logo {
+            width: 30px;
+            height: 30px;
+            background-color: var(--leaf);
+            margin-right: 15px;
+            clip-path: path('M15,0 C25,10 30,15 15,30 C0,15 5,10 15,0');
+            animation: gentle-rotate 3s ease-in-out infinite;
+        }
+
+        @keyframes gentle-rotate {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: normal;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: 3px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .nav-links a:hover {
+            color: var(--hover);
+        }
+
+        .sell-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .sell-form {
+            background: var(--form-bg);
+            padding: 30px;
+            border: 3px solid var(--primary);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(255, 209, 220, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: var(--text);
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            font-size: 16px;
+            background: white;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input[type="number"] {
+            width: 200px;
+        }
+
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            font-size: 16px;
+            min-height: 100px;
+            resize: vertical;
+            background: white;
+        }
+
+        .image-preview {
+            width: 200px;
+            height: 200px;
+            border: 2px dashed var(--primary);
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: cover;
+            background-position: center;
+            color: var(--light-text);
+        }
+
+        .preferences-section {
+            margin: 30px 0;
+        }
+
+        .preferences-title {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: var(--text);
+            text-align: center;
+        }
+
+        .category-label {
+            font-weight: bold;
+            margin: 20px 0 10px 0;
+            color: var(--text);
+            font-size: 16px;
+        }
+
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tag {
+            padding: 8px 16px;
+            background: white;
+            border: 2px solid var(--primary);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .tag:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .tag.selected {
+            background: var(--primary);
+            color: white;
+            border-color: var(--hover);
+        }
+
+        .submit-btn {
+            background: var(--primary);
+            color: var(--text);
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            background: var(--hover);
+        }
+
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .spinner {
+            border: 4px solid rgba(255, 209, 220, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid var(--primary);
+            width: 30px;
+            height: 30px;
+            margin: 0 auto;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .notification {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .success {
+            background-color: rgba(152, 251, 152, 0.3);
+            border: 1px solid var(--leaf);
+            color: #2e8b57;
+        }
+
+        .error {
+            background-color: rgba(255, 182, 193, 0.3);
+            border: 1px solid var(--hover);
+            color: #d63031;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--light-text);
+            border-top: 2px solid var(--border);
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand">
+            <div class="leaf-logo"></div>
+            <span class="logo">CLOSETCOUTURE</span>
+        </a>
+        <div class="nav-links">
+            <a href="shop.html">shop</a>
+            <a href="sell.html">sell</a>
+            <a href="about.html">about</a>
+        </div>
+    </nav>
+
+    <div class="sell-container">
+        <form class="sell-form" id="sellForm">
+            <div class="notification success" id="successMessage">
+                Item listed successfully!
+            </div>
+            <div class="notification error" id="errorMessage">
+                Error submitting form. Please try again.
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="title">Item Title</label>
+                <input type="text" id="title" required>
+            </div>
+
+            <div class="form-group">
+                <label for="price">Price ($)</label>
+                <input type="number" id="price" min="0" step="0.01" required>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="image">Upload Photos</label>
+                <input type="file" id="image" accept="image/*" multiple required>
+                <div class="image-preview" id="imagePreview">
+                    Upload photos here
+                </div>
+            </div>
+            
+            <div class="preferences-section">
+                <h3 class="preferences-title">Item Details</h3>
+                <!-- Tags will be populated here -->
+            </div>
+            
+            <div class="loading-spinner" id="loadingSpinner">
+                <div class="spinner"></div>
+                <p>Submitting your item...</p>
+            </div>
+            
+            <button type="submit" class="submit-btn" id="submitBtn">List Item</button>
+        </form>
+    </div>
+
+    <footer>
+        © 2025 closetcouture
+    </footer>
+
+    <script>
+        // API configuration
+        const API_BASE_URL = 'https://api.closetcouture.com/v1'; // Replace with your actual API URL
+        
+        // Form elements
+        const form = document.getElementById('sellForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+        
+        const preferences = {
+            location: ['Los Angeles', 'New York City', 'Chicago', 'Houston', 'Phoenix', 'Philadelphia', 'San Antonio', 
+                      'San Diego', 'Dallas', 'San Jose', 'Austin', 'San Francisco', 'Seattle', 'Denver', 'Boston', 
+                      'Miami', 'Atlanta', 'Portland', 'Las Vegas', 'Nashville'],
+            details: ['Metallic', 'Floral', 'Stripes', 'Pattern', 'Ruffles', 'Sequins', 'Checkers', 'Animal print'],
+            color: ['Grey', 'Red', 'Beige', 'White', 'Yellow', 'Multicolor', 'Blue', 'Purple', 'Brown', 'Orange', 'Black', 'Green', 'Pink'],
+            size: ['XS', 'XXL', 'S', 'L', 'M', 'XL'],
+            seasons: ['Fall', 'Summer', 'Winter', 'Spring', 'Multi Season'],
+            material: ['Viscose', 'Lyocell', 'Lace', 'Synthetic', 'Cotton', 'Silk', 'Cupro', 'Linen', 'Wool'],
+            length: ['Maxi', 'Mini', 'Midi'],
+            occasion: ['Statement', 'Business', 'Formal', 'Dressed-up', 'Everyday'],
+            fit: ['Oversized', 'Cropped', 'Maternity', 'Curve', 'Wrap', 'Stretchy']
+        };
+
+        // Functions to show/hide UI elements
+        function showLoading() {
+            loadingSpinner.style.display = 'block';
+            submitBtn.disabled = true;
+        }
+        
+        function hideLoading() {
+            loadingSpinner.style.display = 'none';
+            submitBtn.disabled = false;
+        }
+        
+        function showNotification(isSuccess, message) {
+            if (isSuccess) {
+                successMessage.textContent = message || 'Item listed successfully!';
+                successMessage.style.display = 'block';
+                errorMessage.style.display = 'none';
+            } else {
+                errorMessage.textContent = message || 'Error submitting form. Please try again.';
+                errorMessage.style.display = 'block';
+                successMessage.style.display = 'none';
+            }
+            
+            // Auto-hide notification after 5 seconds
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+                errorMessage.style.display = 'none';
+            }, 5000);
+        }
+
+        // Image preview and handling
+        let uploadedImages = [];
+        
+        document.getElementById('image').addEventListener('change', function(e) {
+            const files = e.target.files;
+            if (files.length > 0) {
+                uploadedImages = Array.from(files);
+                
+                // Show the first image as preview
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('imagePreview').style.backgroundImage = `url(${e.target.result})`;
+                    document.getElementById('imagePreview').textContent = '';
+                }
+                reader.readAsDataURL(files[0]);
+            }
+        });
+
+        // Create tag sections
+        const preferencesSection = document.querySelector('.preferences-section');
+        Object.entries(preferences).forEach(([category, items]) => {
+            const categoryDiv = document.createElement('div');
+            categoryDiv.innerHTML = `
+                <div class="category-label">${category.charAt(0).toUpperCase() + category.slice(1)}</div>
+                <div class="tags-container" id="${category}-tags"></div>
+            `;
+            preferencesSection.appendChild(categoryDiv);
+
+            const container = categoryDiv.querySelector('.tags-container');
+            items.forEach(item => {
+                const tag = document.createElement('div');
+                tag.className = 'tag';
+                tag.textContent = item;
+                tag.onclick = () => tag.classList.toggle('selected');
+                container.appendChild(tag);
+            });
+        });
+
+        // Function to upload images to the server
+        async function uploadImages(images) {
+            const imageUrls = [];
+            
+            for (const image of images) {
+                const formData = new FormData();
+                formData.append('image', image);
+                
+                try {
+                    const response = await fetch(`${API_BASE_URL}/uploads`, {
+                        method: 'POST',
+                        body: formData
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`Failed to upload image: ${response.statusText}`);
+                    }
+                    
+                    const data = await response.json();
+                    imageUrls.push(data.imageUrl);
+                } catch (error) {
+                    console.error('Error uploading image:', error);
+                    throw error;
+                }
+            }
+            
+            return imageUrls;
+        }
+
+        // Form submission with API integration
+        document.getElementById('sellForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            try {
+                showLoading();
+                
+                // Collect selected tags
+                const selectedTags = {};
+                Object.keys(preferences).forEach(category => {
+                    const selected = [...document.querySelectorAll(`#${category}-tags .selected`)]
+                        .map(tag => tag.textContent);
+                    selectedTags[category] = selected;
+                });
+                
+                // Upload images first
+                let imageUrls = [];
+                if (uploadedImages.length > 0) {
+                    imageUrls = await uploadImages(uploadedImages);
+                }
+                
+                // Prepare item data
+                const formData = {
+                    email: document.getElementById('email').value,
+                    name: document.getElementById('name').value,
+                    title: document.getElementById('title').value,
+                    price: parseFloat(document.getElementById('price').value),
+                    description: document.getElementById('description').value,
+                    tags: selectedTags,
+                    images: imageUrls,
+                    createdAt: new Date().toISOString()
+                };
+                
+                // Send data to API
+                const response = await fetch(`${API_BASE_URL}/items`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`API error: ${response.statusText}`);
+                }
+                
+                const responseData = await response.json();
+                console.log('Item created:', responseData);
+                
+                // Show success message
+                showNotification(true, 'Your item has been listed successfully!');
+                
+                // Reset form
+                form.reset();
+                document.getElementById('imagePreview').style.backgroundImage = '';
+                document.getElementById('imagePreview').textContent = 'Upload photos here';
+                
+                // Clear selected tags
+                document.querySelectorAll('.tag.selected').forEach(tag => {
+                    tag.classList.remove('selected');
+                });
+                
+                uploadedImages = [];
+                
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                showNotification(false, `Error: ${error.message}`);
+            } finally {
+                hideLoading();
+            }
+        });
+        
+        // Optional: Add API authentication if needed
+        async function getAuthToken() {
+            // This is a placeholder for your authentication logic
+            // You would typically implement this based on your auth system
+            try {
+                const response = await fetch(`${API_BASE_URL}/auth/token`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        // Your authentication credentials would go here
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Authentication failed');
+                }
+                
+                const data = await response.json();
+                return data.token;
+            } catch (error) {
+                console.error('Authentication error:', error);
+                throw error;
+            }
+        }
+    </script>
+</body>
+</html>
