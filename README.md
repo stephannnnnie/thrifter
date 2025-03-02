@@ -1,4 +1,5 @@
 # thrifter
+
 ## Inspiration
 Thrifting not only makes fashion more affordable but also promotes sustainability by encouraging people to purchase second-hand clothing instead of fast fashion items. Our goal was to create a platform that makes second-hand shopping more personalized and enjoyable.
 
@@ -19,3 +20,4 @@ Throughout this project, we learned the importance of clear communication when c
 
 ## What's next for Thrifter 
 Our next step is to introduce outfit-matching features that recommend complete looks based on user preferences. Additionally, we plan to implement a virtual model feature, allowing users to see how outfits would look on different body types.
+![Screenshot 2025-03-02 135535](https://github.com/user-attachments/assets/8be8d5c8-6dfd-49d2-bfb7-32f122a32e94)
