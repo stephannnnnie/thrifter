@@ -1,5 +1,5 @@
 # Thrifter
-Credits to: dengheng@usc.edu boyuedon@usc.edu helenscun@gmail.com zhaoruiw@usc.edu
+##### Credits to: dengheng@usc.edu boyuedon@usc.edu helenscun@gmail.com zhaoruiw@usc.edu
 ----------------------------------------------------------------
 
 ## Inspiration
