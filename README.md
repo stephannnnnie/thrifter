@@ -20,4 +20,6 @@ Throughout this project, we learned the importance of clear communication when c
 
 ## What's next for Thrifter 
 Our next step is to introduce outfit-matching features that recommend complete looks based on user preferences. Additionally, we plan to implement a virtual model feature, allowing users to see how outfits would look on different body types.
+
+
 ![Screenshot 2025-03-02 135535](https://github.com/user-attachments/assets/8be8d5c8-6dfd-49d2-bfb7-32f122a32e94)
