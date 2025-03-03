@@ -13,7 +13,7 @@ app = Flask(__name__)
 CORS(app)
 
 items = []
-uri = "mongodb+srv://dengheng:LRy3rgaPUDtVd3bN@cluster1.gp2ik.mongodb.net/?retryWrites=true&w=majority&appName=cluster1"
+uri = "yourapi"
 client = MongoClient(uri, server_api=ServerApi('1'))
 db = client['secondhand_clothes']
 UPLOAD_FOLDER = 'uploads'
@@ -53,8 +53,6 @@ def get_recommendations():
    user_prefs = request_data.get('preferences', {})
    query = {}
 
-
-   # 创建 $or 条件，用于支持 "或" 的查询
    or_conditions = []
 
 
